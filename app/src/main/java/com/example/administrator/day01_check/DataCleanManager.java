@@ -1,20 +1,24 @@
-package com.example.administrator.day01_check;
-
-import android.content.Context;
-import android.os.Environment;
-import android.text.TextUtils;
-
-import java.io.File;
-import java.math.BigDecimal;
-
-/** * 本应用数据清除管理器 */
+package com.example.administrator.day01_check;  
+  
+/*  * 文 件 名:  DataCleanManager.java   
+ * * 描    述:  主要功能有清除内/外缓存，清除数据库，清除sharedPreference，清除files和清除自定义目录   
+ * */  
+  
+import java.io.File;  
+import java.math.BigDecimal;  
+  
+import android.content.Context;  
+import android.os.Environment;  
+import android.text.TextUtils;  
+  
+/** * 本应用数据清除管理器 */  
 public class DataCleanManager {  
     /** 
      * * 清除本应用内部缓存(/data/data/com.xxx.xxx/cache) * * 
      *  
      * @param context 
      */  
-    public static void cleanInternalCache(Context context) {
+    public static void cleanInternalCache(Context context) {  
         deleteFilesByDirectory(context.getCacheDir());  
     }  
   
@@ -24,7 +28,7 @@ public class DataCleanManager {
      * @param context 
      */  
     public static void cleanDatabases(Context context) {  
-        deleteFilesByDirectory(new File("/data/data/"
+        deleteFilesByDirectory(new File("/data/data/"  
                 + context.getPackageName() + "/databases"));  
     }  
   
@@ -63,7 +67,7 @@ public class DataCleanManager {
      * @param context 
      */  
     public static void cleanExternalCache(Context context) {  
-        if (Environment.getExternalStorageState().equals(
+        if (Environment.getExternalStorageState().equals(  
                 Environment.MEDIA_MOUNTED)) {  
             deleteFilesByDirectory(context.getExternalCacheDir());  
         }  
@@ -139,7 +143,7 @@ public class DataCleanManager {
      * @return 
      */  
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {  
-        if (!TextUtils.isEmpty(filePath)) {
+        if (!TextUtils.isEmpty(filePath)) {  
             try {  
                 File file = new File(filePath);  
                 if (file.isDirectory()) {// 如果下面还有文件  
@@ -170,7 +174,7 @@ public class DataCleanManager {
      * @param size 
      * @return 
      */  
-    public static String getFormatSize(double size) {
+    public static String getFormatSize(double size) {  
         double kiloByte = size / 1024;  
         if (kiloByte < 1) {  
             return size + "Byte";  
@@ -178,7 +182,7 @@ public class DataCleanManager {
   
         double megaByte = kiloByte / 1024;  
         if (megaByte < 1) {  
-            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));  
             return result1.setScale(2, BigDecimal.ROUND_HALF_UP)  
                     .toPlainString() + "KB";  
         }  
